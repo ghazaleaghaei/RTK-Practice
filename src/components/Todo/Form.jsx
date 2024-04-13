@@ -1,14 +1,18 @@
-import { useState } from "react"
-import { useDispatch } from "react-redux"
-import { addTodo } from "../features/todo/todoSlice"
+import { useEffect, useState } from "react"
+import { useDispatch, useSelector } from "react-redux"
+import { addTodo } from "../../features/todo/todoSlice"
 
 function Form() {
     const [value, setValue] = useState("")
+    const editedTodo = useSelector((state) => state.todo.editedTodo)
     const dispatch = useDispatch()
+    useEffect(() => {
+        editedTodo.length > 0 && setValue(editedTodo[0]?.title)
+    }, [editedTodo])
     const submitHandler = (e) => {
         e.preventDefault()
         if (!value) return;
-        dispatch(addTodo({ title: value }))
+        editedTodo.length ? dispatch(addTodo({ title: value, edit: true, id: editedTodo[0].id })) : dispatch(addTodo({ title: value, edit: false, id: 0 }))
         setValue("")
     }
     return (
@@ -26,8 +30,9 @@ function Form() {
             />
             <button
                 type="submit"
-                class="w-fit bg-sky-700 text-white px-2 py-1 rounded-lg">
-                submit
+                class="w-fit bg-sky-700 text-white px-2 py-1 rounded-lg"
+            >
+                {editedTodo.length ? "Edit" : "submit"}
             </button>
         </form>
     )

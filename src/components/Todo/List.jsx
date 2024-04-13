@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux"
-import { Items } from "./Exports"
+import { Items } from "../Exports"
 
 function List() {
     const todo = useSelector((state) => state.todo)

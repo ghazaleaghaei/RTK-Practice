@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux"
-import { Items } from "../Exports"
+import Items from "./Items"
 import { useEffect } from "react"
 import { getAsyncTodo } from "../../features/todo/asyncTodoSlice"
 

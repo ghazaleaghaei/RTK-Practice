@@ -1,4 +1,4 @@
-import { Form } from "../Exports"
+import Form from "./Form"
 import List from "./List"
 
 function AsyncIndex() {
